@@ -18,9 +18,9 @@ struct NewRemoteCode {
 	unsigned long address;		// Address of received code. [0..2^26-1]
 	bool groupBit;				// Group bit set or not
 	SwitchType switchType;		// off, on, dim, on_with_dim.
-	unsigned char unit;			// Unit code of received code [0..15]
+	int8_t unit; 				// Unit code of received code [0..15]
 	bool dimLevelPresent;		// Dim level present or not. Will be available for switchType dim, but might be available for on or off too, depending on remote.
-	unsigned char dimLevel;		// Dim level [0..15]. Will be available if switchType is dim, on_with_dim or off_with_dim.
+	int8_t dimLevel;			// Dim level [0..15]. Will be available if switchType is dim, on_with_dim or off_with_dim.
 };
 
 typedef void (*NewRemoteReceiverCallBack)(NewRemoteCode);
@@ -55,7 +55,7 @@ class NewRemoteReceiver {
 		* @param minRepeats The number of times the same code must be received in a row before the callback is calles
 		* @param callback Pointer to a callback function, with signature void (*func)(NewRemoteCode)
 		*/
-		static void init(int8_t interrupt, unsigned char minRepeats, NewRemoteReceiverCallBack callback);
+		static void init(int8_t interrupt, int8_t minRepeats, NewRemoteReceiverCallBack callback);
 
 		/**
 		* Enable decoding. No need to call enable() after init().
@@ -95,7 +95,7 @@ class NewRemoteReceiver {
 
 		static int8_t _interrupt;					// Radio input interrupt
 		volatile static short _state;				// State of decoding process.
-		static unsigned char _minRepeats;
+		static int8_t _minRepeats;
 		static NewRemoteReceiverCallBack _callback;
 		static bool _inCallback;					// When true, the callback function is being executed; prevents re-entrance.
 		static bool _enabled;					// If true, monitoring and decoding is enabled. If false, interruptHandler will return immediately.
