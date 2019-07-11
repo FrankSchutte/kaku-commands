@@ -17,56 +17,55 @@
 
 int main(int argc, char *argv[])
 {
-    int PIN = 2;
-    
-    if(wiringPiSetup() == -1) {
-      printf("wiringPiSetup failed, exiting...");
-      return 0;
-    }
+  int PIN = 2;
+  
+  if(wiringPiSetup() == -1) {
+    printf("wiringPiSetup failed, exiting...");
+    return 0;
+  }
 
-    NewRemoteReceiver::init(PIN, 2, showCode);
+  void showCode(NewRemoteCode receivedCode)
+  {
+    printf("Address: " + receivedCode.address);
 
-    while (1)
+    if (receivedCode.groupBit)
     {
-
+      printf(", group");
+    }
+    else
+    {
+      printf(", unit: " + receivedCode.unit);
     }
 
-    usleep(100);
+    switch (receivedCode.switchType)
+    {
+      case NewRemoteCode::off:
+      printf(", off");
+        break;
+      case NewRemoteCode::on:
+        printf(", on");
+        break;
+      case NewRemoteCode::dom:
+        printf(", dim");
+        break;
+    }
+
+    if (receivedCode.dimLevelPresent)
+    {
+      printf(", dim level: " + receivedCode.dimLevel;
+    }
+
+    printf(", period: " + receivedCode.period + "us");
+    fflush(stdout);
   }
-  exit(0);
+
+  NewRemoteReceiver::init(PIN, 2, showCode);
+
+  while (1)
+  {
+
+  }
+
+  usleep(100);
 }
-
-void showCode(NewRemoteCode receivedCode)
-{
-  printf("Address: " + receivedCode.address);
-
-  if (receivedCode.groupBit)
-  {
-    printf(", group");
-  }
-  else
-  {
-    printf(", unit: " + receivedCode.unit);
-  }
-
-  switch (receivedCode.switchType)
-  {
-    case NewRemoteCode::off:
-    printf(", off");
-      break;
-    case NewRemoteCode::on:
-      printf(", on");
-      break;
-    case NewRemoteCode::dom:
-      printf(", dim");
-      break;
-  }
-
-  if (receivedCode.dimLevelPresent)
-  {
-    printf(", dim level: " + receivedCode.dimLevel;
-  }
-
-  printf(", period: " + receivedCode.period + "us");
-  fflush(stdout);
-}
+exit(0);
