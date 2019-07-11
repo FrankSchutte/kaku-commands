@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../libs/NewRemoteReceiver.h"
+#include "../libs/NewRemoteReceiver.cpp"
 
 void showCode(NewRemoteCode receivedCode)
 {
