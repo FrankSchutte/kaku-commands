@@ -36,17 +36,17 @@ void showCode(NewRemoteCode receivedCode)
     case NewRemoteCode::on:
       printf(", on");
       break;
-    case NewRemoteCode::dom:
+    case NewRemoteCode::dim:
       printf(", dim");
       break;
   }
 
   if (receivedCode.dimLevelPresent)
   {
-    printf(", dim level: " + receivedCode.dimLevel;
+    printf(", dim level: " + receivedCode.dimLevel);
   }
 
-  printf(", period: " + receivedCode.period + "us");
+  prinf(", period:" + receivedCode.period);
   fflush(stdout);
 }
 
