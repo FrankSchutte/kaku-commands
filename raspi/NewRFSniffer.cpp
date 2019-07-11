@@ -46,7 +46,7 @@ void showCode(NewRemoteCode receivedCode)
     printf(", dim level: " + receivedCode.dimLevel);
   }
 
-  prinf(", period:" + receivedCode.period);
+  printf(", period:" + receivedCode.period);
   fflush(stdout);
 }
 
