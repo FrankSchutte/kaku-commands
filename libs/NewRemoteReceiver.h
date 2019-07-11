@@ -1,13 +1,11 @@
 /*
- * NewRemoteSwitch library v1.2.0 (20140128) made by Randy Simons http://randysimons.nl/
- *
+ * NewRemoteSwitch library v1.2.0 (20140128) made by Randy Simons http://randysimons.nl/ (modified by Frank Schutte)
+ * 
  * License: GPLv3. See license.txt
  */
 
 #ifndef NewRemoteReceiver_h
 #define NewRemoteReceiver_h
-
-#include <Arduino.h>
 
 struct NewRemoteCode {
 	enum SwitchType {
