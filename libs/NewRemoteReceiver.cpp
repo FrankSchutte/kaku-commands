@@ -9,6 +9,9 @@
 
 #define RESET_STATE _state = -1 // Resets state to initial position.
 
+#define B0000 0b000
+#define B0100 0b010
+
 /************
 * NewRemoteReceiver
 
