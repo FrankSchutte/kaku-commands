@@ -15,6 +15,41 @@
 #include <unistd.h>
 #include "../libs/NewRemoteReceiver.h"
 
+void showCode(NewRemoteCode receivedCode)
+{
+  printf("Address: " + receivedCode.address);
+
+  if (receivedCode.groupBit)
+  {
+    printf(", group");
+  }
+  else
+  {
+    printf(", unit: " + receivedCode.unit);
+  }
+
+  switch (receivedCode.switchType)
+  {
+    case NewRemoteCode::off:
+    printf(", off");
+      break;
+    case NewRemoteCode::on:
+      printf(", on");
+      break;
+    case NewRemoteCode::dom:
+      printf(", dim");
+      break;
+  }
+
+  if (receivedCode.dimLevelPresent)
+  {
+    printf(", dim level: " + receivedCode.dimLevel;
+  }
+
+  printf(", period: " + receivedCode.period + "us");
+  fflush(stdout);
+}
+
 int main(int argc, char *argv[])
 {
   int PIN = 2;
@@ -24,48 +59,12 @@ int main(int argc, char *argv[])
     return 0;
   }
 
-  void showCode(NewRemoteCode receivedCode)
-  {
-    printf("Address: " + receivedCode.address);
-
-    if (receivedCode.groupBit)
-    {
-      printf(", group");
-    }
-    else
-    {
-      printf(", unit: " + receivedCode.unit);
-    }
-
-    switch (receivedCode.switchType)
-    {
-      case NewRemoteCode::off:
-      printf(", off");
-        break;
-      case NewRemoteCode::on:
-        printf(", on");
-        break;
-      case NewRemoteCode::dom:
-        printf(", dim");
-        break;
-    }
-
-    if (receivedCode.dimLevelPresent)
-    {
-      printf(", dim level: " + receivedCode.dimLevel;
-    }
-
-    printf(", period: " + receivedCode.period + "us");
-    fflush(stdout);
-  }
-
   NewRemoteReceiver::init(PIN, 2, showCode);
 
   while (1)
   {
-
+    usleep(100);
   }
 
-  usleep(100);
+  exit(0);
 }
-exit(0);
