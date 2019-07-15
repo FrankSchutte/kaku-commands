@@ -1,5 +1,5 @@
 /*
-  NewRFSniffer
+  NewRFSniffer.cpp
   Usage: ./NewRFSniffer
   [] = optional
   Hacked from:
@@ -12,7 +12,7 @@
 #include <iostream>
 #include <wiringPi.h>
 #include <unistd.h>
-#include "../libs/NewRemoteReceiver.cpp"
+#include "../libs/NewRemoteReceiver.h"
 
 using namespace std;
 
