@@ -12,7 +12,7 @@
 #include <iostream>
 #include <wiringPi.h>
 #include <unistd.h>
-#include "../libs/NewRemoteReceiver.h"
+#include "../libs/NewRemoteReceiver.cpp"
 
 using namespace std;
 

@@ -5,7 +5,7 @@
  */
 
 #include <wiringPi.h>
-#include <../libs/NewRemoteTransmitter.h>
+#include <../libs/NewRemoteTransmitter.cpp>
 
 int main(int argc, char *argv[])
 {
