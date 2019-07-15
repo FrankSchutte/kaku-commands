@@ -76,7 +76,6 @@ int main(int argc, char *argv[])
   if (argc >= 2) stopWhenCodeSniffed = atoi(argv[1]) == 1 || argv[1] == "true";
   int timeout = 10;
   if (argc >= 3) timeout = atoi(argv[2]);
-  timeout *= 1000;
 
   NewRemoteReceiver::init(PIN, 2, showCode);
 
@@ -87,8 +86,9 @@ int main(int argc, char *argv[])
   while (!stop)
   {
     usleep(100);
-
-    if (stopWhenCodeSniffed && clock() - start < timeout)
+    int duration = clock() - start / (double) CLOCKS_PER_SEC;
+    cout << "Duration: " << duration << endl;
+    if (duration < timeout)
     {
       stop = true;
     }
