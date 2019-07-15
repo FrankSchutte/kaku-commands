@@ -18,7 +18,8 @@
 
 using namespace std;
 
-bool codeSniffed = false;
+bool stopWhenCodeSniffed = true;
+bool stop = false;
 
 void showCode(NewRemoteCode receivedCode)
 {
@@ -53,7 +54,10 @@ void showCode(NewRemoteCode receivedCode)
 
   cout << " period: " << receivedCode.period << "us." << endl;
 
-  codeSniffed = true;
+  if (stopWhenCodeSniffed)
+  {
+    stop = true;
+  }
 }
 
 int main(int argc, char *argv[])
@@ -68,8 +72,7 @@ int main(int argc, char *argv[])
     cout << "wiringPiSetup failed, exiting..." << endl;
     return 0;
   }
-
-  bool stopWhenCodeSniffed = true;
+  
   if (argc >= 2) stopWhenCodeSniffed = argv[1];
   int timeout = 10;
   if (argc >= 3) timeout = atoi(argv[2]);
@@ -81,11 +84,14 @@ int main(int argc, char *argv[])
   cout << "start: " << start << endl;
   cout << "timeout: " << timeout << endl;
 
-  while (!stopWhenCodeSniffed || (!codeSniffed || clock() - start < timeout))
+  while (!stop)
   {
-    clock_t now = clock();
-    cout << start << " " << now << " " << now - start << endl;
     usleep(100);
+
+    if (stopWhenCodeSniffed && clock() - start < timeout)
+    {
+      stop = true;
+    }
   }
 
   exit(0);
