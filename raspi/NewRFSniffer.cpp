@@ -22,32 +22,32 @@ void showCode(NewRemoteCode receivedCode)
 
   if (receivedCode.groupBit)
   {
-    cout << ", group";
+    cout << " group";
   }
   else
   {
-    cout << ", unit: " << receivedCode.unit;
+    cout << " unit: " << receivedCode.unit;
   }
 
   switch (receivedCode.switchType)
   {
     case NewRemoteCode::off:
-      cout << ", off";
+      cout << " off";
       break;
     case NewRemoteCode::on:
-      cout <<", on";
+      cout << " on";
       break;
     case NewRemoteCode::dim:
-      cout << ", dim";
+      cout << " dim";
       break;
   }
 
   if (receivedCode.dimLevelPresent)
   {
-    cout << ", dim level: " << receivedCode.dimLevel;
+    cout << " dim level: " << receivedCode.dimLevel;
   }
 
-  cout << ", period:" << receivedCode.period << endl;
+  cout << " period:" << receivedCode.period << "us." << endl;
 }
 
 int main(int argc, char *argv[])
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
   int PIN = 2;
   
   if(wiringPiSetup() == -1) {
-    printf("wiringPiSetup failed, exiting...");
+    cout << "wiringPiSetup failed, exiting..." << endl;
     return 0;
   }
 

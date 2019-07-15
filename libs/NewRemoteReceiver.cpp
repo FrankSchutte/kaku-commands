@@ -72,13 +72,6 @@ void NewRemoteReceiver::disable() {
 	_enabled = false;
 }
 
-void NewRemoteReceiver::deinit() {
-	_enabled = false;
-	if (_interrupt >= 0) {
-		// detachInterrupt(_interrupt);
-	}
-}
-
 void NewRemoteReceiver::interruptHandler() {
 	// This method is written as compact code to keep it fast. While breaking up this method into more
 	// methods would certainly increase the readability, it would also be much slower to execute.
