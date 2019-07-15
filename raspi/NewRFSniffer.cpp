@@ -64,7 +64,6 @@ int main(int argc, char *argv[])
 
   cout << "Usage: [stopWhenCodeSniffed] [timeout]" << endl;
   cout << "stopWhenCodeSniffed<bool> if set to false sniffing stops when interrupted manually (ctrl + c), defaults to true" << endl;
-  cout << "timeout<int> specified in seconds. Only if argument stopWhenCodeSniffed is set to true the timeout is used, defaults to 10" << endl;
   
   if(wiringPiSetup() == -1) {
     cout << "wiringPiSetup failed, exiting..." << endl;
