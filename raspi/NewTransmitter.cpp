@@ -4,7 +4,9 @@
     by @FrankSchutte to provide a handy RF code sender
  */
 
+#include <iostream>
 #include <wiringPi.h>
+#include <unistd.h>
 #include "../libs/NewRemoteTransmitter.cpp"
 
 int main(int argc, char *argv[])
