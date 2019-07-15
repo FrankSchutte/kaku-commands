@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
   while (!stopWhenCodeSniffed || (!codeSniffed || clock() - start < timeout))
   {
     clock_t now = clock();
-    cout << start << now << now - start << endl;
+    cout << start << " " << now << " " << now - start << endl;
     usleep(100);
   }
 
