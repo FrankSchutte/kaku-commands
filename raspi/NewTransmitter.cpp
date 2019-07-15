@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
     int PIN = 0;
 
-    if (argc <= 5) {
+    if (argc <= 3) {
       cout << "address unit switchType [period]" << endl;
     }
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     int unit = atoi(argv[2]);
     int switchType = atoi(argv[3]);
     int period = 269;
-    if (argc >= 4) period = argv[4];
+    if (argc >= 4) period = atoi(argv[4]);
 
     cout << "Command:" << endl;
     cout << "Address: " << address;
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
         cout << " dim";
         break;
     }
-    cout << " period:" << receivedCode.period << "us." << endl;
+    cout << " period:" << period << "us." << endl;
 
     NewRemoteTransmitter transmitter(address, 11, period);
     bool isOn = switchType == 1;
