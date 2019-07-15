@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include "../libs/NewRemoteTransmitter.cpp"
 
+using namespace std;
+
 int main(int argc, char *argv[])
 {
     int PIN = 0;
@@ -28,7 +30,7 @@ int main(int argc, char *argv[])
     int period = 269;
     if (argc >= 4) period = argv[4];
 
-    cout << "Received commands:" << endl;
+    cout << "Command:" << endl;
     cout << "Address: " << address;
     cout << " unit: " << unit;
     switch (switchType)
@@ -48,4 +50,6 @@ int main(int argc, char *argv[])
     NewRemoteTransmitter transmitter(address, 11, period);
     bool isOn = switchType == 1;
     transmitter.sendUnit(unit, isOn);
+
+    exit(0);
 }
