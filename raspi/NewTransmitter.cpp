@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     int period = 269;
     if (argc >= 5) period = atoi(argv[4]);
 
-    cout << "Command:" << endl;
+    cout << "Sending code:" << endl;
     cout << "Address: " << address;
     cout << " unit: " << unit;
     switch (switchType)
@@ -46,9 +46,9 @@ int main(int argc, char *argv[])
         cout << " dim";
         break;
     }
-    cout << " period:" << period << "us." << endl;
+    cout << " period: " << period << "us.";
 
-    NewRemoteTransmitter transmitter(address, 11, period);
+    NewRemoteTransmitter transmitter(address, PIN, period);
     bool isOn = switchType == 1;
     transmitter.sendUnit(unit, isOn);
 

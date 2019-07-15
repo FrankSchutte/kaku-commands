@@ -47,7 +47,7 @@ void showCode(NewRemoteCode receivedCode)
     cout << " dim level: " << receivedCode.dimLevel;
   }
 
-  cout << " period:" << receivedCode.period << "us." << endl;
+  cout << " period: " << receivedCode.period << "us." << endl;
 }
 
 int main(int argc, char *argv[])
