@@ -16,7 +16,8 @@ int main(int argc, char *argv[])
     int PIN = 0;
 
     if (argc <= 3) {
-      cout << "address unit switchType [period]" << endl;
+      cout << "Usage: address unit switchType [period]" << endl;
+      return 0;
     }
 
     if(wiringPiSetup() == -1) {
