@@ -1,0 +1,9 @@
+Code: 472418, period duration: 362us.
+Code: 476792, period duration: 362us.
+Code: 473876, period duration: 362us.
+
+Addr 24881174 unit 0 on, period: 269us.
+Addr 24881174 unit 1 on, period: 269us.
+Addr 24881174 unit 2 on, period: 270us.
+
+Addr 24881174 group off, period: 269us.
