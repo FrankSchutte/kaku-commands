@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 
     if (argc <= 3) {
       cout << "Usage: address unit switchTypeText [period]" << endl;
-      cout << "Address<integer>: " << endl;
-      cout << "Unit<integer>: " << endl;
-      cout << "SwitchTypeText<char[]>: off | on | dim" << endl;
-      cout << "Period<integer>: defaults to 269us" << endl;
+      cout << "Address<integer>" << endl;
+      cout << "Unit<integer>" << endl;
+      cout << "SwitchTypeText<string> options are: off | on | dim" << endl;
+      cout << "Period<integer> defaults to 269us" << endl;
       cout << "exiting..." << endl;
       return 0;
     }
@@ -37,11 +37,11 @@ int main(int argc, char *argv[])
     int period = 269;
     if (argc >= 5) period = atoi(argv[4]);
 
-    if (switchTypeText != "off" || switchTypeText != "on" || switchTypeText != "dim")
+    if (switchTypeText != "off" && switchTypeText != "on" && switchTypeText != "dim")
     {
       cout << "Invalid value for switchType argument" << endl;
-      cout << "Provided: " << switchTypeText << endl;
-      cout << "Allowed values: off | on | dim" << endl;
+      cout << "Provided: \"" << switchTypeText << "\"" << endl;
+      cout << "Allowed values are off | on | dim" << endl;
       cout << "exiting..." << endl;
       return 0;
     }
