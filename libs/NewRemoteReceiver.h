@@ -16,11 +16,11 @@ struct NewRemoteCode {
 
 	unsigned int period;		// Detected duration in microseconds of 1T in the received signal
 	unsigned long address;		// Address of received code. [0..2^26-1]
-	boolean groupBit;			// Group bit set or not
+	bool groupBit;				// Group bit set or not
 	SwitchType switchType;		// off, on, dim, on_with_dim.
-	byte unit;					// Unit code of received code [0..15]
-	boolean dimLevelPresent;	// Dim level present or not. Will be available for switchType dim, but might be available for on or off too, depending on remote.
-	byte dimLevel;				// Dim level [0..15]. Will be available if switchType is dim, on_with_dim or off_with_dim.
+	int8_t unit; 				// Unit code of received code [0..15]
+	bool dimLevelPresent;		// Dim level present or not. Will be available for switchType dim, but might be available for on or off too, depending on remote.
+	int8_t dimLevel;			// Dim level [0..15]. Will be available if switchType is dim, on_with_dim or off_with_dim.
 };
 
 typedef void (*NewRemoteReceiverCallBack)(NewRemoteCode);
@@ -55,7 +55,7 @@ class NewRemoteReceiver {
 		* @param minRepeats The number of times the same code must be received in a row before the callback is calles
 		* @param callback Pointer to a callback function, with signature void (*func)(NewRemoteCode)
 		*/
-		static void init(int8_t interrupt, byte minRepeats, NewRemoteReceiverCallBack callback);
+		static void init(int8_t interrupt, int8_t minRepeats, NewRemoteReceiverCallBack callback);
 
 		/**
 		* Enable decoding. No need to call enable() after init().
@@ -84,7 +84,7 @@ class NewRemoteReceiver {
 		* @param waitMillis number of milliseconds to monitor for signal.
 		* @return boolean If after waitMillis no signal was being processed, returns false. If before expiration a signal was being processed, returns true.
 		*/
-		static boolean isReceiving(int waitMillis = 150);
+		static bool isReceiving(int waitMillis = 150);
 
 		/**
 		 * Called every time the signal level changes (high to low or vice versa). Usually called by interrupt.
@@ -95,10 +95,10 @@ class NewRemoteReceiver {
 
 		static int8_t _interrupt;					// Radio input interrupt
 		volatile static short _state;				// State of decoding process.
-		static byte _minRepeats;
+		static int8_t _minRepeats;
 		static NewRemoteReceiverCallBack _callback;
-		static boolean _inCallback;					// When true, the callback function is being executed; prevents re-entrance.
-		static boolean _enabled;					// If true, monitoring and decoding is enabled. If false, interruptHandler will return immediately.
+		static bool _inCallback;					// When true, the callback function is being executed; prevents re-entrance.
+		static bool _enabled;					// If true, monitoring and decoding is enabled. If false, interruptHandler will return immediately.
 
 };
 

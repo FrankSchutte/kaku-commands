@@ -9,6 +9,14 @@
 
 #define RESET_STATE _state = -1 // Resets state to initial position.
 
+#define B1 0b1
+#define B10 0b10
+#define B0000 0b0000
+#define B0001 0b0001
+#define B0100 0b0100
+#define B1110 0b1110
+#define B1111 0b1111
+
 /************
 * NewRemoteReceiver
 
@@ -38,12 +46,12 @@ A full frame looks like this:
 
 int8_t NewRemoteReceiver::_interrupt;
 volatile short NewRemoteReceiver::_state;
-byte NewRemoteReceiver::_minRepeats;
+int8_t NewRemoteReceiver::_minRepeats;
 NewRemoteReceiverCallBack NewRemoteReceiver::_callback;
-boolean NewRemoteReceiver::_inCallback = false;
-boolean NewRemoteReceiver::_enabled = false;
+bool NewRemoteReceiver::_inCallback = false;
+bool NewRemoteReceiver::_enabled = false;
 
-void NewRemoteReceiver::init(int8_t interrupt, byte minRepeats, NewRemoteReceiverCallBack callback) {
+void NewRemoteReceiver::init(int8_t interrupt, int8_t minRepeats, NewRemoteReceiverCallBack callback) {
 	_interrupt = interrupt;
 	_minRepeats = minRepeats;
 	_callback = callback;
@@ -80,10 +88,10 @@ void NewRemoteReceiver::interruptHandler() {
 		return;
 	}
 
-	static byte receivedBit;		// Contains "bit" currently receiving
+	static int8_t receivedBit;				// Contains "bit" currently receiving
 	static NewRemoteCode receivedCode;		// Contains received code
 	static NewRemoteCode previousCode;		// Contains previous received code
-	static byte repeats = 0;		// The number of times the an identical code is received in a row.
+	static int8_t repeats = 0;				// The number of times the an identical code is received in a row.
 	static unsigned long edgeTimeStamp[3] = {0, };	// Timestamp of edges
 	static unsigned int min1Period, max1Period, min5Period, max5Period;
 	static bool skip;
@@ -296,7 +304,7 @@ void NewRemoteReceiver::interruptHandler() {
 	return;
 }
 
-boolean NewRemoteReceiver::isReceiving(int waitMillis) {
+bool NewRemoteReceiver::isReceiving(int waitMillis) {
 	unsigned long startTime=millis();
 
 	int waited; // Signed int!

@@ -13,28 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../libs/NewRemoteReceiver.h"
-
-int main(int argc, char *argv[])
-{
-    int PIN = 2;
-    
-    if(wiringPiSetup() == -1) {
-      printf("wiringPiSetup failed, exiting...");
-      return 0;
-    }
-
-    NewRemoteReceiver::init(PIN, 2, showCode);
-
-    while (1)
-    {
-
-    }
-
-    usleep(100);
-  }
-  exit(0);
-}
+#include "../libs/NewRemoteReceiver.cpp"
 
 void showCode(NewRemoteCode receivedCode)
 {
@@ -57,16 +36,35 @@ void showCode(NewRemoteCode receivedCode)
     case NewRemoteCode::on:
       printf(", on");
       break;
-    case NewRemoteCode::dom:
+    case NewRemoteCode::dim:
       printf(", dim");
       break;
   }
 
   if (receivedCode.dimLevelPresent)
   {
-    printf(", dim level: " + receivedCode.dimLevel;
+    printf(", dim level: " + receivedCode.dimLevel);
   }
 
-  printf(", period: " + receivedCode.period + "us");
+  printf(", period:" + receivedCode.period);
   fflush(stdout);
+}
+
+int main(int argc, char *argv[])
+{
+  int PIN = 2;
+  
+  if(wiringPiSetup() == -1) {
+    printf("wiringPiSetup failed, exiting...");
+    return 0;
+  }
+
+  NewRemoteReceiver::init(PIN, 2, showCode);
+
+  while (1)
+  {
+    usleep(100);
+  }
+
+  exit(0);
 }
