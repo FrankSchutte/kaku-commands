@@ -10,44 +10,43 @@
 */
 
 #include <wiringPi.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+#include <iostream>
 #include "../libs/NewRemoteReceiver.cpp"
+
+using namespace std;
 
 void showCode(NewRemoteCode receivedCode)
 {
-  printf("Address: " + receivedCode.address);
+  cout << "Address: " << receivedCode.address);
 
   if (receivedCode.groupBit)
   {
-    printf(", group");
+    cout << ", group";
   }
   else
   {
-    printf(", unit: " + receivedCode.unit);
+    cout << ", unit: " << receivedCode.unit;
   }
 
   switch (receivedCode.switchType)
   {
     case NewRemoteCode::off:
-    printf(", off");
+      cout << ", off";
       break;
     case NewRemoteCode::on:
-      printf(", on");
+      cout <<", on";
       break;
     case NewRemoteCode::dim:
-      printf(", dim");
+      cout << ", dim";
       break;
   }
 
   if (receivedCode.dimLevelPresent)
   {
-    printf(", dim level: " + receivedCode.dimLevel);
+    cout << ", dim level: " << receivedCode.dimLevel;
   }
 
-  printf(", period:" + receivedCode.period);
-  fflush(stdout);
+  cout << ", period:" << receivedCode.period;
 }
 
 int main(int argc, char *argv[])
