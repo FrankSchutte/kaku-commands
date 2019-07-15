@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     return 0;
   }
   
-  if (argc >= 2) stopWhenCodeSniffed = argv[1];
+  if (argc >= 2) stopWhenCodeSniffed = atoi(argv[1]) == 1 || argv[1] == "true";
   int timeout = 10;
   if (argc >= 3) timeout = atoi(argv[2]);
   timeout *= 1000;
