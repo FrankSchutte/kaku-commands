@@ -16,7 +16,12 @@ int main(int argc, char *argv[])
     int PIN = 0;
 
     if (argc <= 3) {
-      cout << "Usage: address unit switchType [period]" << endl;
+      cout << "Usage: address unit switchTypeText [period]" << endl;
+      cout << "Address<integer>: " << endl;
+      cout << "Unit<integer>: " << endl;
+      cout << "SwitchTypeText<char[]>: off | on | dim" << endl;
+      cout << "Period<integer>: defaults to 269us" << endl;
+      cout << "exiting..." << endl;
       return 0;
     }
 
@@ -27,29 +32,27 @@ int main(int argc, char *argv[])
 
     int address = atoi(argv[1]);
     int unit = atoi(argv[2]);
-    int switchType = atoi(argv[3]);
+    char switchTypeText[] = argv[3];
     int period = 269;
     if (argc >= 5) period = atoi(argv[4]);
+
+    if (switchTypeText != "off" || switchTypeText != "on" || switchTypeText != "dim")
+    {
+      cout << "Invalid value for switchType argument" << endl;
+      cout << "Provided: " << switchTypeText << endl;
+      cout << "Allowed values: off | on | dim" << endl;
+      cout << "exiting..." << endl;
+      return 0;
+    }
 
     cout << "Sending code:" << endl;
     cout << "Address: " << address;
     cout << " unit: " << unit;
-    switch (switchType)
-    {
-      case 0:
-        cout << " off";
-        break;
-      case 1:
-        cout << " on";
-        break;
-      case 2:
-        cout << " dim";
-        break;
-    }
-    cout << " period: " << period << "us.";
+    cout << " " << switchTypeText;
+    cout << " period: " << period << "us." << endl;
 
     NewRemoteTransmitter transmitter(address, PIN, period);
-    bool isOn = switchType == 1;
+    bool isOn = switchTypeText == "on";
     transmitter.sendUnit(unit, isOn);
 
     exit(0);
