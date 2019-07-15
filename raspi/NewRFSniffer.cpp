@@ -71,8 +71,9 @@ int main(int argc, char *argv[])
   NewRemoteReceiver::init(PIN, 2, showCode);
 
   clock_t start = clock();
+  cout << start << endl;
 
-  while (!codeSniffed && clock() - start < timeout)
+  while (!codeSniffed)
   {
     usleep(100);
   }
