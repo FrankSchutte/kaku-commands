@@ -59,23 +59,32 @@ void showCode(NewRemoteCode receivedCode)
 int main(int argc, char *argv[])
 {
   int PIN = 2;
+
+  cout << "Usage: [stopWhenCodeSniffed] [timeout]" << endl;
+  cout << "stopWhenCodeSniffed<bool> if set to false sniffing stops when interrupted manually (ctrl + c), defaults to true" << endl;
+  cout << "timeout<int> specify in seconds. Only if argument stopWhenCodeSniffed is set to true the timeout is used, defaults to 10" << endl;
   
   if(wiringPiSetup() == -1) {
     cout << "wiringPiSetup failed, exiting..." << endl;
     return 0;
   }
 
-  int timeout = 10000;
-  if (argc >= 2) timeout = atoi(argv[1]);
+  bool stopWhenCodeSniffed = true;
+  if (argc >= 2) stopWhenCodeSniffed = atob(argv[1]);
+  int timeout = 10;
+  if (argc >= 3) timeout = atoi(argv[2]);
+  timeout *= 1000;
 
   NewRemoteReceiver::init(PIN, 2, showCode);
 
   clock_t start = clock();
-  cout << start << endl;
+  cout << "start: " << start << endl;
+  cout << "timeout: " << timeout << endl;
 
-  while (!codeSniffed)
+  while (!stopWhenCodeSniffed || (!codeSniffed))
   {
     usleep(100);
+    cout << "clock: " << clock() << endl;
   }
 
   exit(0);

@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 
     if (argc <= 3) {
       cout << "Usage: address unit switchTypeText [period]" << endl;
-      cout << "Address<integer>" << endl;
-      cout << "Unit<integer>" << endl;
-      cout << "SwitchTypeText<string> options are: off | on | dim" << endl;
-      cout << "Period<integer> defaults to 269us" << endl;
+      cout << "address<integer>" << endl;
+      cout << "unit<integer>" << endl;
+      cout << "switchTypeText<string> options are: off | on | dim" << endl;
+      cout << "period<integer> defaults to 269us" << endl;
       cout << "exiting..." << endl;
       return 0;
     }
