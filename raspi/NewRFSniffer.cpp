@@ -18,6 +18,8 @@
 
 using namespace std;
 
+bool codeSniffed = false;
+
 void showCode(NewRemoteCode receivedCode)
 {
   cout << "Address: " << receivedCode.address;
@@ -51,7 +53,7 @@ void showCode(NewRemoteCode receivedCode)
 
   cout << " period: " << receivedCode.period << "us." << endl;
 
-  exit(0);
+  codeSniffed = true;
 }
 
 int main(int argc, char *argv[])
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
 
   clock_t start = clock();
 
-  while (clock() - start < timeout)
+  while (!codeSniffed && clock() - start < timeout)
   {
     usleep(100);
   }
