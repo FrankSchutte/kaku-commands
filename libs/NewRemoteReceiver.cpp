@@ -10,6 +10,7 @@
 #define RESET_STATE _state = -1 // Resets state to initial position.
 
 #define B1 0b1
+#define B00 0b00
 #define B10 0b10
 #define B0000 0b0000
 #define B0001 0b0001
@@ -58,7 +59,7 @@ void NewRemoteReceiver::init(int8_t interrupt, int8_t minRepeats, NewRemoteRecei
 
 	enable();
 	if (_interrupt >= 0) {
-		attachInterrupt(_interrupt, interruptHandler, CHANGE);
+		wiringPiISR(_interrupt, INT_EDGE_BOTH, interruptHandler);
 	}
 }
 
@@ -74,7 +75,7 @@ void NewRemoteReceiver::disable() {
 void NewRemoteReceiver::deinit() {
 	_enabled = false;
 	if (_interrupt >= 0) {
-		detachInterrupt(_interrupt);
+		// detachInterrupt(_interrupt);
 	}
 }
 
