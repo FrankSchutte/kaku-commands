@@ -12,6 +12,8 @@
 #include <iostream>
 #include <wiringPi.h>
 #include <unistd.h>
+#include <cstdio>
+#include <ctime>
 #include "../libs/NewRemoteReceiver.cpp"
 
 using namespace std;
@@ -48,6 +50,8 @@ void showCode(NewRemoteCode receivedCode)
   }
 
   cout << " period: " << receivedCode.period << "us." << endl;
+
+  exit(0);
 }
 
 int main(int argc, char *argv[])
@@ -59,9 +63,14 @@ int main(int argc, char *argv[])
     return 0;
   }
 
+  int timeout = 10000;
+  if (argc >= 2) timeout = atoi(argv[1]);
+
   NewRemoteReceiver::init(PIN, 2, showCode);
 
-  while (1)
+  clock_t start = clock();
+
+  while (clock() - start < timeout)
   {
     usleep(100);
   }
