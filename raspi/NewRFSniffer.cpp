@@ -9,8 +9,8 @@
   by @FrankSchutte to provide a handy RF code sniffer
 */
 
-#include <wiringPi.h>
 #include <iostream>
+#include <wiringPi.h>
 #include <unistd.h>
 #include "../libs/NewRemoteReceiver.cpp"
 
