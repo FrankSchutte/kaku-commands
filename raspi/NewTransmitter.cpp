@@ -7,6 +7,7 @@
 #include <iostream>
 #include <wiringPi.h>
 #include <unistd.h>
+#include <string>
 #include "../libs/NewRemoteTransmitter.cpp"
 
 using namespace std;
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
 
     int address = atoi(argv[1]);
     int unit = atoi(argv[2]);
-    char switchTypeText[] = argv[3];
+    string switchTypeText = argv[3];
     int period = 269;
     if (argc >= 5) period = atoi(argv[4]);
 
