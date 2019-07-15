@@ -11,13 +11,14 @@
 
 #include <wiringPi.h>
 #include <iostream>
+#include <unistd.h>
 #include "../libs/NewRemoteReceiver.cpp"
 
 using namespace std;
 
 void showCode(NewRemoteCode receivedCode)
 {
-  cout << "Address: " << receivedCode.address);
+  cout << "Address: " << receivedCode.address;
 
   if (receivedCode.groupBit)
   {
