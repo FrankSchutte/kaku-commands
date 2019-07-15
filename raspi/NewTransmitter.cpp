@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     int unit = atoi(argv[2]);
     int switchType = atoi(argv[3]);
     int period = 269;
-    if (argc >= 4) period = atoi(argv[4]);
+    if (argc >= 5) period = atoi(argv[4]);
 
     cout << "Command:" << endl;
     cout << "Address: " << address;
